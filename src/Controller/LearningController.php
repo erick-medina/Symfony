@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ShowMyName;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class LearningController extends AbstractController
@@ -17,7 +18,6 @@ class LearningController extends AbstractController
         return $this->render('learning/index.html.twig', [
             'controller_name' => 'LearningController',
             'name' => $name->getName(),
-
         ]);
     }
 
@@ -29,11 +29,8 @@ class LearningController extends AbstractController
         $name = new ShowMyName();
         return $this->render('learning/changeMyName.html.twig', [
             'name' => $name->getName(),
-
         ]);
     }
-
-
 
     public function aboutMe()
     {

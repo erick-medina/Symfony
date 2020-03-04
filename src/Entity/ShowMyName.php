@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use function Symfony\Component\VarDumper\Dumper\esc;
 
 /**
@@ -33,18 +35,18 @@ class ShowMyName
      */
     public function getName() : string
     {
+        $session = new Session();
+        $setSession = $session->get('name');
         if(isset($_POST['name'])) {
-            $_SESSION['name'] = $_POST['name'];
+            $session->set('name', $_POST['name']);
             $this->name = $_POST['name'];
         }
-        elseif (isset($_SESSION['name'])) {
-            $this->name = $_SESSION['name'];
-        }
-        else {
-            $this->name = $this->showMyName();
+        elseif(isset($setSession)) {
+            $this->name = $setSession;
         }
         return $this->name;
     }
+
 
 
 
